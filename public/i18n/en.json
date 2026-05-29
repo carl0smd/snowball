@@ -1,0 +1,73 @@
+{
+  "title": "Snowball",
+  "subtitle": "Interactive Financial Planner",
+  "meta": {
+    "privacy": "100% Private. No cloud databases. Your financial data stays inside your browser."
+  },
+  "nav": {
+    "compound": "Growth Simulator",
+    "fire": "F.I.R.E. Calculator"
+  },
+  "inputs": {
+    "title": "Control Panel",
+    "initialCapital": "Initial Capital",
+    "monthlyContribution": "Monthly Savings",
+    "annualReturn": "Expected Annual Return",
+    "years": "Projection Years",
+    "inflation": "Estimated Annual Inflation",
+    "monthlyExpenses": "Monthly Expenses (Retirement)",
+    "riskProfile": "Portfolio Risk Profile",
+    "riskConservative": "Conservative",
+    "riskModerate": "Moderate",
+    "riskAggressive": "Aggressive",
+    "riskExtreme": "Extreme (100% Equities)",
+    "reset": "Reset Variables"
+  },
+  "outputs": {
+    "title": "Your Financial Outputs",
+    "kpi": {
+      "nominal": "Final Wealth (Nominal)",
+      "real": "Real Purchasing Power",
+      "contributions": "Pure Savings Contributed",
+      "interests": "Total Interest Generated"
+    },
+    "kpiDesc": {
+      "nominal": "Raw physically accumulated money in your accounts.",
+      "real": "Money adjusted for inflation based today's cost of living.",
+      "contributions": "Sum of all cash added out of your own pocket.",
+      "interests": "Extra capital generated thanks to compound interest."
+    },
+    "chartTitle": "Wealth Evolution Projection",
+    "allocTitle": "Suggested Asset Allocation",
+    "allocPlaceholder": "Choose a risk profile on the left to see the suggested asset allocation."
+  },
+  "fire": {
+    "targetNumber": "Your F.I.R.E. Number",
+    "targetNumberDesc": "Minimum invested capital you need to fund your expenses forever under the 4% rule.",
+    "timeToFire": "Years to Financial Freedom",
+    "achievable": "Goal Achievable!",
+    "unachievable": "Goal out of range (50+ years)",
+    "months": "months",
+    "alreadyFire": "You are already financially free!",
+    "descText": "Based on your monthly expenses of {{expenses}}€ and a safe withdrawal rate of 4%, you need a real portfolio of {{fireNumber}}€. At your current saving and investment rate, you will reach it in:"
+  },
+  "dashboard": {
+    "monthLabel": "mo",
+    "year": "Year",
+    "import": "Import JSON",
+    "export": "Export JSON",
+    "modeNominalReal": "Real vs Nominal Details",
+    "modeScenarios": "Scenarios Projection",
+    "importError": "Error importing file. Invalid JSON format.",
+    "chart": {
+      "nominalBalance": "Nominal Wealth",
+      "realBalance": "Real Wealth (Adjusted)",
+      "contributions": "Capital Contributed",
+      "variableIncome": "Equities",
+      "fixedIncome": "Fixed Income",
+      "optimistic": "Favorable Scenario",
+      "expected": "Expected Scenario",
+      "pessimistic": "Unfavorable Scenario"
+    }
+  }
+}

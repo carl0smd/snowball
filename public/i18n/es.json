@@ -1,0 +1,73 @@
+{
+  "title": "Snowball",
+  "subtitle": "Planificador Financiero e Interactivo",
+  "meta": {
+    "privacy": "100% Privado. Sin base de datos en la nube. Tus datos permanecen en tu navegador."
+  },
+  "nav": {
+    "compound": "Simulador de Crecimiento",
+    "fire": "Calculadora F.I.R.E."
+  },
+  "inputs": {
+    "title": "Panel de Control",
+    "initialCapital": "Capital Inicial",
+    "monthlyContribution": "Ahorro Mensual",
+    "annualReturn": "Rentabilidad Anual Esperada",
+    "years": "Años de Proyección",
+    "inflation": "Inflación Anual Estimada",
+    "monthlyExpenses": "Gastos Mensuales (Jubilación)",
+    "riskProfile": "Perfil de Riesgo de Cartera",
+    "riskConservative": "Conservador",
+    "riskModerate": "Moderado",
+    "riskAggressive": "Agresivo",
+    "riskExtreme": "Extremo (100% R. Variable)",
+    "reset": "Restablecer Variables"
+  },
+  "outputs": {
+    "title": "Tus Resultados Financieros",
+    "kpi": {
+      "nominal": "Patrimonio Final (Nominal)",
+      "real": "Poder Adquisitivo Real",
+      "contributions": "Ahorro Puro Aportado",
+      "interests": "Intereses Totales Generados"
+    },
+    "kpiDesc": {
+      "nominal": "Dinero físico acumulado en cuenta.",
+      "real": "Dinero corregido por la inflación en base al coste de la vida hoy.",
+      "contributions": "Suma de lo que ha salido de tu propio bolsillo.",
+      "interests": "El capital extra generado gracias al interés compuesto."
+    },
+    "chartTitle": "Evolución de tu Riqueza",
+    "allocTitle": "Distribución de Activos Sugerida",
+    "allocPlaceholder": "Elige un perfil de riesgo a la izquierda para ver la distribución de activos sugerida."
+  },
+  "fire": {
+    "targetNumber": "Tu Número F.I.R.E.",
+    "targetNumberDesc": "Capital mínimo invertido que necesitas para financiar tus gastos indefinidamente con la regla del 4%.",
+    "timeToFire": "Años para la Libertad Financiera",
+    "achievable": "¡Objetivo Alcanzable!",
+    "unachievable": "Objetivo fuera de rango (50+ años)",
+    "months": "meses",
+    "alreadyFire": "¡Ya eres financieramente libre!",
+    "descText": "Basándote en tus gastos de {{expenses}}€/mes y una tasa de retiro seguro del 4%, necesitas un patrimonio real de {{fireNumber}}€. Con tu ritmo de ahorro e inversiones, lo conseguirás en:"
+  },
+  "dashboard": {
+    "monthLabel": "mes",
+    "year": "Año",
+    "import": "Importar JSON",
+    "export": "Exportar JSON",
+    "modeNominalReal": "Detalle Real vs Nominal",
+    "modeScenarios": "Proyección de Escenarios",
+    "importError": "Error al importar el archivo. Formato JSON inválido.",
+    "chart": {
+      "nominalBalance": "Patrimonio Nominal",
+      "realBalance": "Patrimonio Real (Ajustado)",
+      "contributions": "Capital Aportado",
+      "variableIncome": "Renta Variable",
+      "fixedIncome": "Renta Fija",
+      "optimistic": "Escenario Favorable",
+      "expected": "Escenario Esperado",
+      "pessimistic": "Escenario Desfavorable"
+    }
+  }
+}
