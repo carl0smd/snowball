@@ -34,6 +34,10 @@ export class GrowthTabComponent {
 
   private growthChartInstance?: Chart;
   private allocationChartInstance?: Chart;
+  private isInitialRender = true;
+  private lastMode?: string;
+  private lastDark?: boolean;
+  private lastCurrency?: string;
 
   @ViewChild('growthChart') set growthChart(content: ElementRef<HTMLCanvasElement>) {
     if (content) {
@@ -60,6 +64,13 @@ export class GrowthTabComponent {
       const mode = this.chartMode();
       const isDark = this.darkMode();
       const curr = this.currency();
+      
+      if (mode !== this.lastMode || isDark !== this.lastDark || curr !== this.lastCurrency) {
+        this.isInitialRender = true;
+        this.lastMode = mode;
+        this.lastDark = isDark;
+        this.lastCurrency = curr;
+      }
       
       if (this.growthChartInstance) {
         if (mode === 'nominal-real') {
@@ -97,6 +108,7 @@ export class GrowthTabComponent {
         if (this.growthChartInstance) {
           this.growthChartInstance.destroy();
         }
+        this.isInitialRender = true;
         this.growthChartInstance = new Chart(ctx, {
           type: 'line',
           data: {
@@ -183,7 +195,12 @@ export class GrowthTabComponent {
     ];
 
     this.growthChartInstance.options = this.getGrowthChartOptions(isDark);
-    this.growthChartInstance.update();
+    if (this.isInitialRender) {
+      this.growthChartInstance.update();
+      this.isInitialRender = false;
+    } else {
+      this.growthChartInstance.update('none');
+    }
   }
 
   private updateScenariosChartData(scenarios: ScenarioYearlyResult[], isDark: boolean) {
@@ -228,7 +245,12 @@ export class GrowthTabComponent {
     ];
 
     this.growthChartInstance.options = this.getGrowthChartOptions(isDark);
-    this.growthChartInstance.update();
+    if (this.isInitialRender) {
+      this.growthChartInstance.update();
+      this.isInitialRender = false;
+    } else {
+      this.growthChartInstance.update('none');
+    }
   }
 
   private updateAllocationChartData(allocation: AssetAllocation | null, isDark: boolean) {
