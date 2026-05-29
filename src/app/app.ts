@@ -55,6 +55,7 @@ export class App implements OnInit {
   // --- UI State Signals ---
   darkMode = signal<boolean>(true);
   currentLang = signal<string>('es');
+  currency = signal<'EUR' | 'USD'>('EUR');
   activeTab = signal<'compound' | 'fire'>('compound');
   chartMode = signal<'nominal-real' | 'scenarios'>('nominal-real');
 
@@ -182,6 +183,7 @@ export class App implements OnInit {
         darkMode: this.darkMode(),
         currentLang: this.currentLang(),
         chartMode: this.chartMode(),
+        currency: this.currency(),
       };
       localStorage.setItem('snowball_settings', JSON.stringify(settings));
     });
@@ -206,6 +208,7 @@ export class App implements OnInit {
         if (settings.riskProfile !== undefined) this.riskProfile.set(settings.riskProfile);
         if (settings.darkMode !== undefined) this.darkMode.set(settings.darkMode);
         if (settings.chartMode !== undefined) this.chartMode.set(settings.chartMode);
+        if (settings.currency !== undefined) this.currency.set(settings.currency);
         if (settings.currentLang !== undefined) {
           this.currentLang.set(settings.currentLang);
           this.translocoService.setActiveLang(settings.currentLang);
@@ -225,6 +228,7 @@ export class App implements OnInit {
     this.monthlyExpenses.set(1500);
     this.riskProfile.set(null);
     this.chartMode.set('nominal-real');
+    this.currency.set('EUR');
   }
 
   selectRiskProfile(profile: 'conservative' | 'moderate' | 'aggressive' | 'extreme') {
@@ -255,6 +259,10 @@ export class App implements OnInit {
     const nextLang = this.currentLang() === 'es' ? 'en' : 'es';
     this.translocoService.setActiveLang(nextLang);
     this.currentLang.set(nextLang);
+  }
+
+  toggleCurrency() {
+    this.currency.update(curr => curr === 'EUR' ? 'USD' : 'EUR');
   }
 
   toggleTheme() {

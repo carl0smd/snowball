@@ -4,6 +4,7 @@ import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { Chart, registerables } from 'chart.js';
 import { YearlySimulationResult } from '../../core/services/finance.service';
 import { AssetAllocation, ScenarioYearlyResult } from '../../app';
+import { formatCurrency } from '../../core/utils/currency-formatter';
 
 Chart.register(...registerables);
 
@@ -24,6 +25,7 @@ export class GrowthTabComponent {
   chartMode = input.required<'nominal-real' | 'scenarios'>();
   darkMode = input.required<boolean>();
   currentLang = input.required<string>();
+  currency = input<'EUR' | 'USD'>('EUR');
 
   chartModeChange = output<'nominal-real' | 'scenarios'>();
 
@@ -57,6 +59,7 @@ export class GrowthTabComponent {
       const scenarios = this.scenarios();
       const mode = this.chartMode();
       const isDark = this.darkMode();
+      const curr = this.currency();
       
       if (this.growthChartInstance) {
         if (mode === 'nominal-real') {
@@ -278,11 +281,7 @@ export class GrowthTabComponent {
               let label = context.dataset.label || '';
               if (label) label += ': ';
               if (context.parsed.y !== null) {
-                label += new Intl.NumberFormat(this.currentLang() === 'es' ? 'es-ES' : 'en-US', {
-                  style: 'currency',
-                  currency: 'EUR',
-                  maximumFractionDigits: 0,
-                }).format(context.parsed.y);
+                label += formatCurrency(context.parsed.y, this.currency(), this.currentLang());
               }
               return label;
             },
@@ -300,9 +299,15 @@ export class GrowthTabComponent {
             color: textColor,
             font: { family: 'Inter', size: 11 },
             callback: (value: number) => {
-              if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M €`;
-              if (value >= 1e3) return `${(value / 1e3).toFixed(0)}k €`;
-              return `${value} €`;
+              if (this.currency() === 'USD') {
+                if (value >= 1e6) return `$${(value / 1e6).toFixed(1)}M`;
+                if (value >= 1e3) return `$${(value / 1e3).toFixed(0)}k`;
+                return `$${value}`;
+              } else {
+                if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M €`;
+                if (value >= 1e3) return `${(value / 1e3).toFixed(0)}k €`;
+                return `${value} €`;
+              }
             },
           },
         },

@@ -20,9 +20,9 @@
         t('fire.targetNumber')
       }}</span>
       <h4
-        class="font-display font-extrabold text-2xl text-violet-600 dark:text-violet-400 leading-none mt-1"
+        class="font-display font-extrabold text-2xl text-violet-600 dark:text-violet-400 leading-none mt-1 whitespace-nowrap"
       >
-        {{ fireStatus().fireNumber | currency: 'EUR' : 'symbol' : '1.0-0' }}
+        {{ formatCurrency(fireStatus().fireNumber, currency(), currentLang()) }}
       </h4>
     </div>
   </div>
@@ -35,8 +35,8 @@
         class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed"
         [innerHTML]="
           t('fire.descText', {
-            expenses: monthlyExpenses(),
-            fireNumber: (fireStatus().fireNumber | currency: 'EUR' : 'symbol' : '1.0-0'),
+            expenses: formatCurrency(monthlyExpenses(), currency(), currentLang()),
+            fireNumber: formatCurrency(fireStatus().fireNumber, currency(), currentLang()),
           })
         "
       ></p>

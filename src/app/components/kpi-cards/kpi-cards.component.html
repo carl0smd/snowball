@@ -2,48 +2,36 @@
   
   <!-- Nominal wealth Card -->
   <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-violet-500/30 dark:hover:border-violet-500/30 transition-all-300 relative overflow-hidden">
-    <div class="absolute -right-6 -bottom-6 text-violet-500/5 group-hover:text-violet-500/10 transition-all-300">
-      <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.554-.589 1.448-.589 2.002 0l.207.22 1.477-1.477-.207-.22A4.082 4.082 0 0012 3.65V2H8v1.65c-.822.257-1.57.733-2.122 1.418-.553.69-.878 1.547-.878 2.432v.068c0 1.258.62 2.41 1.706 3.109l2.25 1.446C9.57 12.518 10 13.064 10 13.67v.068c0 .59-.43 1.09-1.002 1.17l-.207.03-1.477-1.477.207-.03a2.08 2.08 0 001.07-1.09c.277-.69.878-1.547.878-2.432v-.068c0-1.258-.62-2.41-1.706-3.109l-2.25-1.446C4.43 8.482 4 7.936 4 7.33v-.068c0-.59.43-1.09 1.002-1.17l.207-.03 1.477 1.477-.207.03c-.277.69-.878 1.547-.878 2.432v.068c0 1.258.62 2.41 1.706 3.109l2.25 1.446C15.57 15.518 16 16.064 16 16.67v.068c0 1.768-1.39 3.23-3.18 3.518V22h-4v-1.744c-1.802-.27-3.195-1.737-3.195-3.518v-.068c0-1.258.62-2.41 1.706-3.109l2.25-1.446A2.082 2.082 0 0010 10.33v-.068c0-.59-.43-1.09-1.002-1.17l-.207-.03-1.477 1.477.207.03c.277.69.878 1.547.878 2.432v.068c0 1.258.62 2.41 1.706 3.109l2.25 1.446c1.086.699 1.706 1.85 1.706 3.109v.068c0 1.768-1.39 3.23-3.18 3.518V22h-4v-1.744c-1.802-.27-3.195-1.737-3.195-3.518v-.068c0-1.258.62-2.41 1.706-3.109l2.25-1.446C15.57 15.518 16 16.064 16 16.67v.068c0 1.768-1.39 3.23-3.18 3.518V22H8.433z"/></svg>
-    </div>
     <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest min-h-8">{{ t('outputs.kpi.nominal') }}</p>
     <h3 class="font-display font-extrabold text-lg md:text-xl text-violet-600 dark:text-violet-400 mt-1">
-      {{ nominalBalance() | currency:'EUR':'symbol':'1.0-0' }}
+      {{ formatCurrency(nominalBalance(), currency(), currentLang()) }}
     </h3>
     <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.nominal') }}</p>
   </div>
 
   <!-- Real Purchasing Power Card -->
   <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-emerald-500/30 dark:hover:border-emerald-500/30 transition-all-300 relative overflow-hidden">
-    <div class="absolute -right-6 -bottom-6 text-emerald-500/5 group-hover:text-emerald-500/10 transition-all-300">
-      <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" /></svg>
-    </div>
     <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest min-h-8">{{ t('outputs.kpi.real') }}</p>
     <h3 class="font-display font-extrabold text-lg md:text-xl text-emerald-600 dark:text-emerald-400 mt-1">
-      {{ realBalance() | currency:'EUR':'symbol':'1.0-0' }}
+      {{ formatCurrency(realBalance(), currency(), currentLang()) }}
     </h3>
     <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.real') }}</p>
   </div>
 
   <!-- Pure Contributions Card -->
   <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-zinc-500/30 transition-all-300 relative overflow-hidden">
-    <div class="absolute -right-6 -bottom-6 text-zinc-500/5 group-hover:text-zinc-500/10 transition-all-300">
-      <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" /><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" /></svg>
-    </div>
     <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest min-h-8">{{ t('outputs.kpi.contributions') }}</p>
     <h3 class="font-display font-extrabold text-lg md:text-xl text-zinc-700 dark:text-zinc-300 mt-1">
-      {{ totalContributed() | currency:'EUR':'symbol':'1.0-0' }}
+      {{ formatCurrency(totalContributed(), currency(), currentLang()) }}
     </h3>
     <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.contributions') }}</p>
   </div>
 
   <!-- Interests Generated Card -->
   <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-indigo-500/30 transition-all-300 relative overflow-hidden">
-    <div class="absolute -right-6 -bottom-6 text-indigo-500/5 group-hover:text-indigo-500/10 transition-all-300">
-      <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.259-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.259zm8.861 9.99a1 1 0 101.932-.517l-.26-.966a1 1 0 10-1.931.517l.259.966zm3.971-2.128a1 1 0 10.518-1.932l-.966-.259a1 1 0 10-.518 1.932l.966.259zM1.119 12.002a1 1 0 011-1h.01a1 1 0 110 2h-.01a1 1 0 01-1-1zm12.89 0a1 1 0 011-1h.01a1 1 0 110 2h-.01a1 1 0 01-1-1zM5.006 14.19a1 1 0 00-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.259zM16.242 4.74a1 1 0 11.518 1.932l-.966.259a1 1 0 11-.518-1.932l.966-.259zm-8.354-.641a1 1 0 00-.258-.966 1 1 0 10-1.932.518l.259.966a1 1 0 001.931-.518z" clip-rule="evenodd" /></svg>
-    </div>
     <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest min-h-8">{{ t('outputs.kpi.interests') }}</p>
     <h3 class="font-display font-extrabold text-lg md:text-xl text-indigo-600 dark:text-indigo-400 mt-1">
-      {{ nominalInterests() | currency:'EUR':'symbol':'1.0-0' }}
+      {{ formatCurrency(nominalInterests(), currency(), currentLang()) }}
     </h3>
     <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.interests') }}</p>
   </div>

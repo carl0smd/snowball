@@ -23,7 +23,8 @@
     "riskExtreme": "Extremo",
     "reset": "Restablecer Variables",
     "riskDeselect": "Deseleccionar",
-    "yearsUnit": "años"
+    "yearsUnit": "años",
+    "infoTooltip": "Usa los controles deslizantes o haz clic en el valor destacado para escribir un importe manualmente."
   },
   "outputs": {
     "title": "Tus Resultados Financieros",
@@ -51,7 +52,7 @@
     "unachievable": "Objetivo fuera de rango (50+ años)",
     "months": "meses",
     "alreadyFire": "¡Ya eres financieramente libre!",
-    "descText": "Basándote en tus gastos de {{expenses}}€/mes y una tasa de retiro seguro del 4%, necesitas un patrimonio real de {{fireNumber}}€. Con tu ritmo de ahorro e inversiones, lo conseguirás en:"
+    "descText": "Basándote en tus gastos de {{expenses}}/mes y una tasa de retiro seguro del 4%, necesitas un patrimonio real de {{fireNumber}}. Con tu ritmo de ahorro e inversiones, lo conseguirás en:"
   },
   "dashboard": {
     "monthLabel": "mes",

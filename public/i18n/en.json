@@ -23,7 +23,8 @@
     "riskExtreme": "Extreme",
     "reset": "Reset Variables",
     "riskDeselect": "Deselect",
-    "yearsUnit": "years"
+    "yearsUnit": "years",
+    "infoTooltip": "Use the sliders or click on the highlighted value to enter an amount manually."
   },
   "outputs": {
     "title": "Your Financial Outputs",
@@ -51,7 +52,7 @@
     "unachievable": "Goal out of range (50+ years)",
     "months": "months",
     "alreadyFire": "You are already financially free!",
-    "descText": "Based on your monthly expenses of {{expenses}}€ and a safe withdrawal rate of 4%, you need a real portfolio of {{fireNumber}}€. At your current saving and investment rate, you will reach it in:"
+    "descText": "Based on your monthly expenses of {{expenses}} and a safe withdrawal rate of 4%, you need a real portfolio of {{fireNumber}}. At your current saving and investment rate, you will reach it in:"
   },
   "dashboard": {
     "monthLabel": "mo",

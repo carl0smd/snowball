@@ -2,6 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { SliderInputComponent } from '../slider-input/slider-input.component';
+import { formatCurrency } from '../../core/utils/currency-formatter';
 
 @Component({
   selector: 'app-control-panel',
@@ -18,6 +19,10 @@ export class ControlPanelComponent {
   monthlyExpenses = input.required<number>();
   riskProfile = input<string | null>(null);
   activeTab = input.required<string>();
+  currency = input<'EUR' | 'USD'>('EUR');
+  currentLang = input<string>('es');
+
+  formatCurrency = formatCurrency;
 
   initialCapitalChange = output<number>();
   monthlyContributionChange = output<number>();
@@ -37,4 +42,15 @@ export class ControlPanelComponent {
     { id: 'aggressive', labelKey: 'inputs.riskAggressive' },
     { id: 'extreme', labelKey: 'inputs.riskExtreme' },
   ] as const;
+
+  formatCurrencyLabel(value: number): string {
+    const symbol = this.currency() === 'EUR' ? '€' : '$';
+    if (value === 0) return `${value} ${symbol}`;
+    if (value >= 1000000) return `${value / 1000000}M ${symbol}`;
+    if (value >= 1000) {
+      // Use standard prefix or suffix based on symbol
+      return this.currency() === 'EUR' ? `${value / 1000}k €` : `$${value / 1000}k`;
+    }
+    return this.currency() === 'EUR' ? `${value} €` : `$${value}`;
+  }
 }

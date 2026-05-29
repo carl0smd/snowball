@@ -5,8 +5,10 @@
   <app-header
     [currentLang]="currentLang()"
     [darkMode]="darkMode()"
+    [currentCurrency]="currency()"
     (toggleLanguage)="toggleLanguage()"
     (toggleTheme)="toggleTheme()"
+    (toggleCurrency)="toggleCurrency()"
   >
   </app-header>
 
@@ -53,6 +55,8 @@
         [monthlyExpenses]="monthlyExpenses()"
         [riskProfile]="riskProfile()"
         [activeTab]="activeTab()"
+        [currency]="currency()"
+        [currentLang]="currentLang()"
         (initialCapitalChange)="initialCapital.set($event)"
         (monthlyContributionChange)="monthlyContribution.set($event)"
         (annualReturnChange)="onReturnChange($event)"
@@ -75,6 +79,8 @@
           [realBalance]="realBalance()"
           [totalContributed]="totalContributed()"
           [nominalInterests]="nominalInterests()"
+          [currency]="currency()"
+          [currentLang]="currentLang()"
         >
         </app-kpi-cards>
 
@@ -89,6 +95,7 @@
             [chartMode]="chartMode()"
             [darkMode]="darkMode()"
             [currentLang]="currentLang()"
+            [currency]="currency()"
             (chartModeChange)="chartMode.set($event)"
           >
           </app-growth-tab>
@@ -96,7 +103,12 @@
 
         <!-- TAB 2: F.I.R.E. DETAILED CALCULATOR -->
         <div [class.hidden]="activeTab() !== 'fire'">
-          <app-fire-tab [fireStatus]="fireStatus()" [monthlyExpenses]="monthlyExpenses()">
+          <app-fire-tab 
+            [fireStatus]="fireStatus()" 
+            [monthlyExpenses]="monthlyExpenses()"
+            [currency]="currency()"
+            [currentLang]="currentLang()"
+          >
           </app-fire-tab>
         </div>
       </section>

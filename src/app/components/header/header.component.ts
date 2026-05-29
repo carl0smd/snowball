@@ -11,7 +11,9 @@ import { TranslocoDirective } from '@jsverse/transloco';
 export class HeaderComponent {
   currentLang = input.required<string>();
   darkMode = input.required<boolean>();
+  currentCurrency = input.required<'EUR' | 'USD'>();
 
   toggleLanguage = output<void>();
   toggleTheme = output<void>();
+  toggleCurrency = output<void>();
 }

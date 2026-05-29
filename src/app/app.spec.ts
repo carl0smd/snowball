@@ -63,6 +63,30 @@ describe('App', () => {
     expect(app.chartMode()).toBe('nominal-real');
   });
 
+  it('should initialize with default currency as EUR', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app.currency()).toBe('EUR');
+  });
+
+  it('should toggle currency between EUR and USD', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app.currency()).toBe('EUR');
+    app.toggleCurrency();
+    expect(app.currency()).toBe('USD');
+    app.toggleCurrency();
+    expect(app.currency()).toBe('EUR');
+  });
+
+  it('should reset currency to EUR on resetSettings', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app.currency.set('USD');
+    app.resetSettings();
+    expect(app.currency()).toBe('EUR');
+  });
+
   it('should calculate scenarios correctly with a cono de incertidumbre', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
