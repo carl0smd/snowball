@@ -2,11 +2,12 @@ import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { SliderInputComponent } from '../slider-input/slider-input.component';
 
 @Component({
   selector: 'app-control-panel',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslocoDirective],
+  imports: [CommonModule, FormsModule, TranslocoDirective, SliderInputComponent],
   templateUrl: './control-panel.component.html',
 })
 export class ControlPanelComponent {
@@ -30,4 +31,11 @@ export class ControlPanelComponent {
   resetSettings = output<void>();
   exportSettings = output<void>();
   importSettings = output<Event>();
+
+  readonly riskProfiles = [
+    { id: 'conservative', labelKey: 'inputs.riskConservative' },
+    { id: 'moderate', labelKey: 'inputs.riskModerate' },
+    { id: 'aggressive', labelKey: 'inputs.riskAggressive' },
+    { id: 'extreme', labelKey: 'inputs.riskExtreme' },
+  ] as const;
 }
