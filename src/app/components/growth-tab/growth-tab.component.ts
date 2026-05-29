@@ -109,18 +109,26 @@ export class GrowthTabComponent {
     const allocation = this.allocation();
     if (!allocation) return;
     const isDark = this.darkMode();
-    const ctx = this._allocationChartCanvas.nativeElement.getContext('2d');
-    if (ctx) {
-      this.allocationChartInstance = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: [],
-          datasets: [],
-        },
-        options: this.getAllocationChartOptions(isDark),
-      });
-      this.updateAllocationChartData(this.allocation(), isDark);
-    }
+    
+    // Defer initialization to ensure the browser has completed layout and the canvas has physical dimensions
+    setTimeout(() => {
+      if (!this._allocationChartCanvas) return;
+      const ctx = this._allocationChartCanvas.nativeElement.getContext('2d');
+      if (ctx) {
+        if (this.allocationChartInstance) {
+          this.allocationChartInstance.destroy();
+        }
+        this.allocationChartInstance = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: [],
+            datasets: [],
+          },
+          options: this.getAllocationChartOptions(isDark),
+        });
+        this.updateAllocationChartData(this.allocation(), isDark);
+      }
+    }, 0);
   }
 
   private updateGrowthChartData(results: YearlySimulationResult[], isDark: boolean) {
