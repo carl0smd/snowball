@@ -48,7 +48,7 @@ export class App implements OnInit {
   monthlyContribution = signal<number>(200);
   annualReturn = signal<number>(7); // in % (e.g. 7 means 7%)
   years = signal<number>(30);
-  inflation = signal<number>(2); // in % (e.g. 2 means 2%)
+  inflation = signal<number>(3); // in % (e.g. 3 means 3%)
   monthlyExpenses = signal<number>(1500);
   riskProfile = signal<'conservative' | 'moderate' | 'aggressive' | 'extreme' | null>(null);
   
@@ -221,7 +221,7 @@ export class App implements OnInit {
     this.monthlyContribution.set(200);
     this.annualReturn.set(7);
     this.years.set(30);
-    this.inflation.set(2);
+    this.inflation.set(3);
     this.monthlyExpenses.set(1500);
     this.riskProfile.set(null);
     this.chartMode.set('nominal-real');
@@ -318,5 +318,6 @@ export class App implements OnInit {
       }
     };
     reader.readAsText(file);
+    input.value = '';
   }
 }

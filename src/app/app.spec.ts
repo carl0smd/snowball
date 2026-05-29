@@ -54,7 +54,7 @@ describe('App', () => {
     expect(app.monthlyContribution()).toBe(200);
     expect(app.annualReturn()).toBe(7);
     expect(app.years()).toBe(30);
-    expect(app.inflation()).toBe(2);
+    expect(app.inflation()).toBe(3);
   });
 
   it('should initialize with default chartMode as nominal-real', () => {
@@ -96,5 +96,21 @@ describe('App', () => {
     app.deselectRiskProfile();
     expect(app.riskProfile()).toBeNull();
     expect(app.annualReturn()).toBe(7);
+  });
+
+  it('should reset input value after importing JSON to allow consecutive imports', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    
+    const file = new File(['{"simulationInputs":{"initialCapital":25000}}'], 'snowball.json', { type: 'application/json' });
+    const mockEvent = {
+      target: {
+        files: [file],
+        value: 'C:\\fakepath\\snowball.json'
+      }
+    } as unknown as Event;
+    
+    app.importFromJson(mockEvent);
+    expect((mockEvent.target as HTMLInputElement).value).toBe('');
   });
 });

@@ -22,7 +22,8 @@
     "riskAggressive": "Agresivo",
     "riskExtreme": "Extremo",
     "reset": "Restablecer Variables",
-    "riskDeselect": "Deseleccionar"
+    "riskDeselect": "Deseleccionar",
+    "yearsUnit": "años"
   },
   "outputs": {
     "title": "Tus Resultados Financieros",
