@@ -1,0 +1,178 @@
+<section *transloco="let t" class="lg:col-span-1 flex flex-col gap-5 bg-white dark:bg-zinc-900/40 p-6 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-md shadow-sm transition-all-300">
+  
+  <div class="flex items-center justify-between border-b border-zinc-200/50 dark:border-zinc-800/50 pb-3">
+    <h2 class="font-display font-bold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+      <svg class="h-5 w-5 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+      </svg>
+      {{ t('inputs.title') }}
+    </h2>
+    <button (click)="resetSettings.emit()" 
+            class="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-violet-500 cursor-pointer transition-all-300"
+            [title]="t('inputs.reset')">
+      <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- INPUT SLIDERS -->
+  <div class="flex flex-col gap-4">
+    
+    <!-- Capital Inicial -->
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.initialCapital') }}</label>
+        <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
+          {{ initialCapital() | currency:'EUR':'symbol':'1.0-0' }}
+        </span>
+      </div>
+      <input type="range" min="0" max="500000" step="5000" [ngModel]="initialCapital()" (ngModelChange)="initialCapitalChange.emit($event)">
+      <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
+        <span>0 €</span>
+        <span>250k €</span>
+        <span>500k €</span>
+      </div>
+    </div>
+
+    <!-- Ahorro Mensual -->
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.monthlyContribution') }}</label>
+        <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
+          {{ monthlyContribution() | currency:'EUR':'symbol':'1.0-0' }}/{{ t('dashboard.monthLabel') }}
+        </span>
+      </div>
+      <input type="range" min="0" max="5000" step="50" [ngModel]="monthlyContribution()" (ngModelChange)="monthlyContributionChange.emit($event)">
+      <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
+        <span>0 €</span>
+        <span>2.5k €</span>
+        <span>5k €</span>
+      </div>
+    </div>
+
+    <!-- Rentabilidad Anual -->
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.annualReturn') }}</label>
+        <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
+          {{ annualReturn() }}%
+        </span>
+      </div>
+      <input type="range" min="1" max="15" step="0.5" [ngModel]="annualReturn()" (ngModelChange)="annualReturnChange.emit($event)">
+      <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
+        <span>1%</span>
+        <span>8%</span>
+        <span>15%</span>
+      </div>
+    </div>
+
+    <!-- Años -->
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.years') }}</label>
+        <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
+          {{ years() }} {{ t('inputs.years') | lowercase }}
+        </span>
+      </div>
+      <input type="range" min="1" max="50" step="1" [ngModel]="years()" (ngModelChange)="yearsChange.emit($event)">
+      <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
+        <span>1 {{ t('dashboard.year') | lowercase }}</span>
+        <span>25</span>
+        <span>50</span>
+      </div>
+    </div>
+
+    <!-- Inflación -->
+    <div class="flex flex-col gap-1.5">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.inflation') }}</label>
+        <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
+          {{ inflation() }}%
+        </span>
+      </div>
+      <input type="range" min="0" max="8" step="0.1" [ngModel]="inflation()" (ngModelChange)="inflationChange.emit($event)">
+      <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
+        <span>0%</span>
+        <span>4%</span>
+        <span>8%</span>
+      </div>
+    </div>
+
+    <!-- FIRE Specific input (Active only in FIRE tab) -->
+    @if (activeTab() === 'fire') {
+      <div class="flex flex-col gap-1.5 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50 transition-all-300">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.monthlyExpenses') }}</label>
+          <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
+            {{ monthlyExpenses() | currency:'EUR':'symbol':'1.0-0' }}
+          </span>
+        </div>
+        <input type="range" min="500" max="10000" step="100" [ngModel]="monthlyExpenses()" (ngModelChange)="monthlyExpensesChange.emit($event)">
+        <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
+          <span>500 €</span>
+          <span>5k €</span>
+          <span>10k €</span>
+        </div>
+      </div>
+    }
+
+    <!-- Perfil de riesgo de cartera -->
+    @if (activeTab() === 'compound') {
+      <div class="flex flex-col gap-2 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50 transition-all-300">
+        <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.riskProfile') }}</label>
+        <div class="grid grid-cols-2 gap-2">
+          <button (click)="riskProfileSelect.emit('conservative')"
+                  [class]="riskProfile() === 'conservative'
+                            ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
+                            : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
+                  class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
+            {{ t('inputs.riskConservative') }}
+          </button>
+          <button (click)="riskProfileSelect.emit('moderate')"
+                  [class]="riskProfile() === 'moderate'
+                            ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
+                            : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
+                  class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
+            {{ t('inputs.riskModerate') }}
+          </button>
+          <button (click)="riskProfileSelect.emit('aggressive')"
+                  [class]="riskProfile() === 'aggressive'
+                            ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
+                            : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
+                  class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
+            {{ t('inputs.riskAggressive') }}
+          </button>
+          <button (click)="riskProfileSelect.emit('extreme')"
+                  [class]="riskProfile() === 'extreme'
+                            ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
+                            : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
+                  class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
+            {{ t('inputs.riskExtreme') }}
+          </button>
+        </div>
+      </div>
+    }
+
+  </div>
+
+  <!-- EXPORT / IMPORT ACTIONS -->
+  <div class="grid grid-cols-2 gap-3 mt-2 pt-4 border-t border-zinc-200/50 dark:border-zinc-800/50">
+    <button (click)="exportSettings.emit()" 
+            class="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 cursor-pointer transition-all-300">
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+      </svg>
+      {{ t('dashboard.export') }}
+    </button>
+    
+    <label class="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 cursor-pointer transition-all-300">
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+      </svg>
+      {{ t('dashboard.import') }}
+      <input type="file" (change)="importSettings.emit($event)" accept=".json" class="hidden">
+    </label>
+  </div>
+
+</section>

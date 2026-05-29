@@ -20,8 +20,9 @@
     "riskConservative": "Conservador",
     "riskModerate": "Moderado",
     "riskAggressive": "Agresivo",
-    "riskExtreme": "Extremo (100% R. Variable)",
-    "reset": "Restablecer Variables"
+    "riskExtreme": "Extremo",
+    "reset": "Restablecer Variables",
+    "riskDeselect": "Deseleccionar"
   },
   "outputs": {
     "title": "Tus Resultados Financieros",

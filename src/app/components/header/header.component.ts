@@ -1,0 +1,17 @@
+import { Component, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslocoDirective } from '@jsverse/transloco';
+
+@Component({
+  selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule, TranslocoDirective],
+  templateUrl: './header.component.html',
+})
+export class HeaderComponent {
+  currentLang = input.required<string>();
+  darkMode = input.required<boolean>();
+
+  toggleLanguage = output<void>();
+  toggleTheme = output<void>();
+}

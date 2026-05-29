@@ -1,79 +1,41 @@
-<div class="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 flex flex-col font-sans transition-all-300" *transloco="let t">
-  
-  <!-- --- HEADER --- -->
-  <header class="border-b border-zinc-200/60 dark:border-zinc-800/60 backdrop-blur-md bg-white/70 dark:bg-zinc-900/70 sticky top-0 z-30 transition-all-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      
-      <!-- App Brand -->
-      <div class="flex items-center gap-3">
-        <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-violet-600 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-violet-500/20">
-          <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
-        </div>
-        <div>
-          <h1 class="font-display font-extrabold text-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 dark:from-violet-400 dark:via-fuchsia-400 dark:to-indigo-400 bg-clip-text text-transparent leading-none">
-            {{ t('title') }}
-          </h1>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-            {{ t('subtitle') }}
-          </p>
-        </div>
-      </div>
+<div
+  class="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 flex flex-col font-sans transition-all-300"
+  *transloco="let t"
+>
+  <app-header
+    [currentLang]="currentLang()"
+    [darkMode]="darkMode()"
+    (toggleLanguage)="toggleLanguage()"
+    (toggleTheme)="toggleTheme()"
+  >
+  </app-header>
 
-      <!-- App Control Center -->
-      <div class="flex items-center gap-3">
-        
-        <!-- Privacy Badge (Desktop) -->
-        <span class="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100/50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-900/50 transition-all-300">
-          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-          {{ t('meta.privacy') }}
-        </span>
-
-        <!-- Language Selector -->
-        <button (click)="toggleLanguage()" 
-                class="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs font-bold hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer transition-all-300">
-          {{ currentLang() === 'es' ? 'EN' : 'ES' }}
-        </button>
-
-        <!-- Theme Toggle -->
-        <button (click)="toggleTheme()" 
-                class="p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer transition-all-300">
-          @if (darkMode()) {
-            <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M6.343 6.343l.707-.707m2.828 9.9a5 5 0 117.072 0l-.066.066a5.003 5.003 0 00-7.072 0z" />
-            </svg>
-          } @else {
-            <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-          }
-        </button>
-
-      </div>
-    </div>
-  </header>
-
-  <!-- --- MAIN VIEW CONTAINER --- -->
-  <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
-
+  <main class="grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
     <!-- TAB NAVIGATION -->
     <div class="flex justify-center">
-      <div class="bg-zinc-200/60 dark:bg-zinc-900/60 p-1 rounded-xl flex gap-1 border border-zinc-200/30 dark:border-zinc-800/30 backdrop-blur">
-        <button (click)="activeTab.set('compound')"
-                [class]="activeTab() === 'compound' 
-                          ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm' 
-                          : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'"
-                class="px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all-300">
+      <div
+        class="bg-zinc-200/60 dark:bg-zinc-900/60 p-1 rounded-xl flex gap-1 border border-zinc-200/30 dark:border-zinc-800/30 backdrop-blur"
+      >
+        <button
+          (click)="activeTab.set('compound')"
+          [class]="
+            activeTab() === 'compound'
+              ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm'
+              : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+          "
+          class="px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all-300"
+        >
           {{ t('nav.compound') }}
         </button>
-        <button (click)="activeTab.set('fire')"
-                [class]="activeTab() === 'fire' 
-                          ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm' 
-                          : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'"
-                class="px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all-300">
+        <button
+          (click)="activeTab.set('fire')"
+          [class]="
+            activeTab() === 'fire'
+              ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm'
+              : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+          "
+          class="px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all-300"
+        >
           {{ t('nav.fire') }}
         </button>
       </div>
@@ -81,422 +43,62 @@
 
     <!-- MAIN TWO COLUMN GRID -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- --- LEFT COLUMN: CONTROL PANEL (1/3) --- -->
-      <section class="lg:col-span-1 flex flex-col gap-5 bg-white dark:bg-zinc-900/40 p-6 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-md shadow-sm transition-all-300">
-        
-        <div class="flex items-center justify-between border-b border-zinc-200/50 dark:border-zinc-800/50 pb-3">
-          <h2 class="font-display font-bold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-            <svg class="h-5 w-5 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
-            {{ t('inputs.title') }}
-          </h2>
-          <button (click)="resetSettings()" 
-                  class="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-violet-500 cursor-pointer transition-all-300"
-                  [title]="t('inputs.reset')">
-            <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.23" />
-            </svg>
-          </button>
-        </div>
+      <!-- LEFT COLUMN: CONTROL PANEL (1/3) -->
+      <app-control-panel
+        [initialCapital]="initialCapital()"
+        [monthlyContribution]="monthlyContribution()"
+        [annualReturn]="annualReturn()"
+        [years]="years()"
+        [inflation]="inflation()"
+        [monthlyExpenses]="monthlyExpenses()"
+        [riskProfile]="riskProfile()"
+        [activeTab]="activeTab()"
+        (initialCapitalChange)="initialCapital.set($event)"
+        (monthlyContributionChange)="monthlyContribution.set($event)"
+        (annualReturnChange)="onReturnChange($event)"
+        (yearsChange)="years.set($event)"
+        (inflationChange)="inflation.set($event)"
+        (monthlyExpensesChange)="monthlyExpenses.set($event)"
+        (riskProfileSelect)="selectRiskProfile($event)"
+        (resetSettings)="resetSettings()"
+        (exportSettings)="exportToJson()"
+        (importSettings)="importFromJson($event)"
+      >
+      </app-control-panel>
 
-        <!-- INPUT SLIDERS -->
-        <div class="flex flex-col gap-4">
-          
-          <!-- Capital Inicial -->
-          <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.initialCapital') }}</label>
-              <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-                {{ initialCapital() | currency:'EUR':'symbol':'1.0-0' }}
-              </span>
-            </div>
-            <input type="range" min="0" max="500000" step="5000" [ngModel]="initialCapital()" (ngModelChange)="initialCapital.set($event)">
-            <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
-              <span>0 €</span>
-              <span>250k €</span>
-              <span>500k €</span>
-            </div>
-          </div>
-
-          <!-- Ahorro Mensual -->
-          <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.monthlyContribution') }}</label>
-              <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-                {{ monthlyContribution() | currency:'EUR':'symbol':'1.0-0' }}/{{ t('dashboard.monthLabel') }}
-              </span>
-            </div>
-            <input type="range" min="0" max="5000" step="50" [ngModel]="monthlyContribution()" (ngModelChange)="monthlyContribution.set($event)">
-            <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
-              <span>0 €</span>
-              <span>2.5k €</span>
-              <span>5k €</span>
-            </div>
-          </div>
-
-          <!-- Rentabilidad Anual -->
-          <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.annualReturn') }}</label>
-              <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-                {{ annualReturn() }}%
-              </span>
-            </div>
-            <input type="range" min="1" max="15" step="0.5" [ngModel]="annualReturn()" (ngModelChange)="onReturnChange($event)">
-            <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
-              <span>1%</span>
-              <span>8%</span>
-              <span>15%</span>
-            </div>
-          </div>
-
-          <!-- Años -->
-          <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.years') }}</label>
-              <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-                {{ years() }} {{ t('inputs.years') | lowercase }}
-              </span>
-            </div>
-            <input type="range" min="1" max="50" step="1" [ngModel]="years()" (ngModelChange)="years.set($event)">
-            <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
-              <span>1 {{ t('dashboard.year') | lowercase }}</span>
-              <span>25</span>
-              <span>50</span>
-            </div>
-          </div>
-
-          <!-- Inflación -->
-          <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.inflation') }}</label>
-              <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-                {{ inflation() }}%
-              </span>
-            </div>
-            <input type="range" min="0" max="8" step="0.1" [ngModel]="inflation()" (ngModelChange)="inflation.set($event)">
-            <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
-              <span>0%</span>
-              <span>4%</span>
-              <span>8%</span>
-            </div>
-          </div>
-
-          <!-- FIRE Specific input (Active only in FIRE tab) -->
-          @if (activeTab() === 'fire') {
-            <div class="flex flex-col gap-1.5 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50 transition-all-300">
-              <div class="flex items-center justify-between">
-                <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.monthlyExpenses') }}</label>
-                <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-                  {{ monthlyExpenses() | currency:'EUR':'symbol':'1.0-0' }}
-                </span>
-              </div>
-              <input type="range" min="500" max="10000" step="100" [ngModel]="monthlyExpenses()" (ngModelChange)="monthlyExpenses.set($event)">
-              <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
-                <span>500 €</span>
-                <span>5k €</span>
-                <span>10k €</span>
-              </div>
-            </div>
-          }
-
-          <!-- Perfil de riesgo de cartera -->
-          @if (activeTab() === 'compound') {
-            <div class="flex flex-col gap-2 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50 transition-all-300">
-              <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ t('inputs.riskProfile') }}</label>
-              <div class="grid grid-cols-2 gap-2">
-                <button (click)="selectRiskProfile('conservative')"
-                        [class]="riskProfile() === 'conservative'
-                                  ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
-                                  : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
-                        class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
-                  {{ t('inputs.riskConservative') }}
-                </button>
-                <button (click)="selectRiskProfile('moderate')"
-                        [class]="riskProfile() === 'moderate'
-                                  ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
-                                  : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
-                        class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
-                  {{ t('inputs.riskModerate') }}
-                </button>
-                <button (click)="selectRiskProfile('aggressive')"
-                        [class]="riskProfile() === 'aggressive'
-                                  ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
-                                  : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
-                        class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
-                  {{ t('inputs.riskAggressive') }}
-                </button>
-                <button (click)="selectRiskProfile('extreme')"
-                        [class]="riskProfile() === 'extreme'
-                                  ? 'bg-zinc-100 dark:bg-zinc-800 text-violet-600 dark:text-violet-400 ring-2 ring-violet-500/30 font-bold border-violet-500/50'
-                                  : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'"
-                        class="px-2 py-2 border rounded-lg text-xs font-semibold transition-all-300 cursor-pointer">
-                  {{ t('inputs.riskExtreme') }}
-                </button>
-              </div>
-            </div>
-          }
-
-        </div>
-
-        <!-- EXPORT / IMPORT ACTIONS -->
-        <div class="grid grid-cols-2 gap-3 mt-2 pt-4 border-t border-zinc-200/50 dark:border-zinc-800/50">
-          <button (click)="exportToJson()" 
-                  class="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 cursor-pointer transition-all-300">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            {{ t('dashboard.export') }}
-          </button>
-          
-          <label class="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 cursor-pointer transition-all-300">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
-            {{ t('dashboard.import') }}
-            <input type="file" (change)="importFromJson($event)" accept=".json" class="hidden">
-          </label>
-        </div>
-
-      </section>
-
-      <!-- --- RIGHT COLUMN: VISUAL DASHBOARD OUTPUTS (2/3) --- -->
+      <!-- RIGHT COLUMN: VISUAL DASHBOARD OUTPUTS (2/3) -->
       <section class="lg:col-span-2 flex flex-col gap-6">
-
         <!-- KPI CARDS GRID -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          
-          <!-- Nominal wealth Card -->
-          <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-violet-500/30 dark:hover:border-violet-500/30 transition-all-300 relative overflow-hidden">
-            <div class="absolute -right-6 -bottom-6 text-violet-500/5 group-hover:text-violet-500/10 transition-all-300">
-              <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.554-.589 1.448-.589 2.002 0l.207.22 1.477-1.477-.207-.22A4.082 4.082 0 0012 3.65V2H8v1.65c-.822.257-1.57.733-2.122 1.418-.553.69-.878 1.547-.878 2.432v.068c0 1.258.62 2.41 1.706 3.109l2.25 1.446C9.57 12.518 10 13.064 10 13.67v.068c0 .59-.43 1.09-1.002 1.17l-.207.03-1.477-1.477.207-.03a2.08 2.08 0 001.07-1.09c.277-.69.878-1.547.878-2.432v-.068c0-1.258-.62-2.41-1.706-3.109l-2.25-1.446C4.43 8.482 4 7.936 4 7.33v-.068c0-.59.43-1.09 1.002-1.17l.207-.03 1.477 1.477-.207.03c-.277.69-.878 1.547-.878 2.432v.068c0 1.258.62 2.41 1.706 3.109l2.25 1.446C15.57 15.518 16 16.064 16 16.67v.068c0 1.768-1.39 3.23-3.18 3.518V22h-4v-1.744c-1.802-.27-3.195-1.737-3.195-3.518v-.068c0-1.258.62-2.41 1.706-3.109l2.25-1.446A2.082 2.082 0 0010 10.33v-.068c0-.59-.43-1.09-1.002-1.17l-.207-.03-1.477 1.477.207.03c.277.69.878 1.547.878 2.432v.068c0 1.258.62 2.41 1.706 3.109l2.25 1.446c1.086.699 1.706 1.85 1.706 3.109v.068c0 1.768-1.39 3.23-3.18 3.518V22h-4v-1.744c-1.802-.27-3.195-1.737-3.195-3.518v-.068c0-1.258.62-2.41 1.706-3.109l2.25-1.446C15.57 15.518 16 16.064 16 16.67v.068c0 1.768-1.39 3.23-3.18 3.518V22H8.433z"/></svg>
-            </div>
-            <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">{{ t('outputs.kpi.nominal') }}</p>
-            <h3 class="font-display font-extrabold text-lg md:text-xl text-violet-600 dark:text-violet-400 mt-1">
-              {{ nominalBalance() | currency:'EUR':'symbol':'1.0-0' }}
-            </h3>
-            <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.nominal') }}</p>
-          </div>
-
-          <!-- Real Purchasing Power Card -->
-          <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-emerald-500/30 dark:hover:border-emerald-500/30 transition-all-300 relative overflow-hidden">
-            <div class="absolute -right-6 -bottom-6 text-emerald-500/5 group-hover:text-emerald-500/10 transition-all-300">
-              <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" /></svg>
-            </div>
-            <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">{{ t('outputs.kpi.real') }}</p>
-            <h3 class="font-display font-extrabold text-lg md:text-xl text-emerald-600 dark:text-emerald-400 mt-1">
-              {{ realBalance() | currency:'EUR':'symbol':'1.0-0' }}
-            </h3>
-            <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.real') }}</p>
-          </div>
-
-          <!-- Pure Contributions Card -->
-          <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-zinc-500/30 transition-all-300 relative overflow-hidden">
-            <div class="absolute -right-6 -bottom-6 text-zinc-500/5 group-hover:text-zinc-500/10 transition-all-300">
-              <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" /><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" /></svg>
-            </div>
-            <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">{{ t('outputs.kpi.contributions') }}</p>
-            <h3 class="font-display font-extrabold text-lg md:text-xl text-zinc-700 dark:text-zinc-300 mt-1">
-              {{ totalContributed() | currency:'EUR':'symbol':'1.0-0' }}
-            </h3>
-            <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.contributions') }}</p>
-          </div>
-
-          <!-- Interests Generated Card -->
-          <div class="group bg-white dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 hover:border-indigo-500/30 transition-all-300 relative overflow-hidden">
-            <div class="absolute -right-6 -bottom-6 text-indigo-500/5 group-hover:text-indigo-500/10 transition-all-300">
-              <svg class="h-20 w-20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.259-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.259zm8.861 9.99a1 1 0 101.932-.517l-.26-.966a1 1 0 10-1.931.517l.259.966zm3.971-2.128a1 1 0 10.518-1.932l-.966-.259a1 1 0 10-.518 1.932l.966.259zM1.119 12.002a1 1 0 011-1h.01a1 1 0 110 2h-.01a1 1 0 01-1-1zm12.89 0a1 1 0 011-1h.01a1 1 0 110 2h-.01a1 1 0 01-1-1zM5.006 14.19a1 1 0 00-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.259zM16.242 4.74a1 1 0 11.518 1.932l-.966.259a1 1 0 11-.518-1.932l.966-.259zm-8.354-.641a1 1 0 00-.258-.966 1 1 0 10-1.932.518l.259.966a1 1 0 001.931-.518z" clip-rule="evenodd" /></svg>
-            </div>
-            <p class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">{{ t('outputs.kpi.interests') }}</p>
-            <h3 class="font-display font-extrabold text-lg md:text-xl text-indigo-600 dark:text-indigo-400 mt-1">
-              {{ nominalInterests() | currency:'EUR':'symbol':'1.0-0' }}
-            </h3>
-            <p class="text-[10px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium leading-normal">{{ t('outputs.kpiDesc.interests') }}</p>
-          </div>
-
-        </div>
+        <app-kpi-cards
+          [nominalBalance]="nominalBalance()"
+          [realBalance]="realBalance()"
+          [totalContributed]="totalContributed()"
+          [nominalInterests]="nominalInterests()"
+        >
+        </app-kpi-cards>
 
         <!-- TAB 1: COMPOUND INTEREST VISUALS -->
-        <div [class.hidden]="activeTab() !== 'compound'" class="flex flex-col gap-6 transition-all-300">
-            
-            <!-- Growth Chart Card -->
-            <div class="bg-white dark:bg-zinc-900/40 p-6 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm flex flex-col gap-4">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <h4 class="font-display font-bold text-sm text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                  {{ chartMode() === 'nominal-real' ? t('outputs.chartTitle') : t('dashboard.modeScenarios') }}
-                </h4>
-                <div class="flex bg-zinc-100 dark:bg-zinc-800/60 p-0.5 rounded-lg border border-zinc-200/50 dark:border-zinc-800/50 text-[11px] font-semibold">
-                  <button type="button" (click)="chartMode.set('nominal-real')" [class]="chartMode() === 'nominal-real' ? 'bg-white dark:bg-zinc-700 text-violet-600 dark:text-violet-300 shadow-xs font-bold' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'" class="px-2.5 py-1 rounded-md transition-all duration-300 cursor-pointer">
-                    {{ t('dashboard.modeNominalReal') }}
-                  </button>
-                  <button type="button" (click)="chartMode.set('scenarios')" [class]="chartMode() === 'scenarios' ? 'bg-white dark:bg-zinc-700 text-violet-600 dark:text-violet-300 shadow-xs font-bold' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'" class="px-2.5 py-1 rounded-md transition-all duration-300 cursor-pointer">
-                    {{ t('dashboard.modeScenarios') }}
-                  </button>
-                </div>
-              </div>
-              <div class="relative h-80 w-full">
-                <canvas #growthChart></canvas>
-              </div>
-            </div>
-
-            <!-- Suggested Asset Allocation Card -->
-            <div class="bg-white dark:bg-zinc-900/40 p-6 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm min-h-[250px] flex items-center justify-center transition-all-300">
-              @if (riskAllocation()) {
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center w-full">
-                  <div class="md:col-span-1 flex flex-col gap-3">
-                    <h4 class="font-display font-bold text-sm text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      {{ t('outputs.allocTitle') }}
-                    </h4>
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                      {{ t('inputs.riskProfile') }}: <strong class="text-violet-500 capitalize">{{ riskProfile() }}</strong>. 
-                      Esta distribución de activos está estadísticamente optimizada para rentabilidades anualizadas objetivo del {{ annualReturn() }}%.
-                    </p>
-                    <div class="flex flex-col gap-1.5 mt-2">
-                      <div class="flex items-center gap-2 text-xs font-semibold">
-                        <span class="h-3 w-3 rounded-full bg-violet-400"></span>
-                        <span>{{ t('dashboard.chart.variableIncome') }}: <strong>{{ riskAllocation()?.variableIncome }}%</strong></span>
-                      </div>
-                      <div class="flex items-center gap-2 text-xs font-semibold">
-                        <span class="h-3 w-3 rounded-full bg-blue-400"></span>
-                        <span>{{ t('dashboard.chart.fixedIncome') }}: <strong>{{ riskAllocation()?.fixedIncome }}%</strong></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="md:col-span-2 relative h-56 w-full flex justify-center">
-                    <canvas #allocationChart></canvas>
-                  </div>
-                </div>
-              } @else {
-                <div class="flex flex-col items-center justify-center text-center p-6 max-w-md mx-auto gap-3.5">
-                  <div class="h-12 w-12 rounded-full bg-violet-50 dark:bg-violet-950/30 border border-violet-100/50 dark:border-violet-900/30 flex items-center justify-center text-violet-500 dark:text-violet-400">
-                    <svg class="h-6 w-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 class="font-display font-bold text-sm text-zinc-700 dark:text-zinc-300">
-                      {{ t('outputs.allocTitle') }}
-                    </h4>
-                    <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1 leading-normal max-w-sm">
-                      {{ t('outputs.allocPlaceholder') }}
-                    </p>
-                  </div>
-                </div>
-              }
-            </div>
-
-          </div>
+        <div [class.hidden]="activeTab() !== 'compound'">
+          <app-growth-tab
+            [results]="simulationResults()"
+            [scenarios]="scenariosResults()"
+            [allocation]="riskAllocation()"
+            [annualReturn]="annualReturn()"
+            [riskProfile]="riskProfile()"
+            [chartMode]="chartMode()"
+            [darkMode]="darkMode()"
+            [currentLang]="currentLang()"
+            (chartModeChange)="chartMode.set($event)"
+          >
+          </app-growth-tab>
+        </div>
 
         <!-- TAB 2: F.I.R.E. DETAILED CALCULATOR -->
-        <div [class.hidden]="activeTab() !== 'fire'" class="bg-white dark:bg-zinc-900/40 p-6 sm:p-8 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm flex flex-col gap-6 transition-all-300">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200/50 dark:border-zinc-800/50 pb-4 gap-3">
-              <div>
-                <h3 class="font-display font-extrabold text-xl text-zinc-900 dark:text-zinc-100">
-                  {{ t('nav.fire') }}
-                </h3>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400">
-                  {{ t('fire.targetNumberDesc') }}
-                </p>
-              </div>
-              <div class="text-left sm:text-right bg-violet-50 dark:bg-violet-950/30 border border-violet-100/50 dark:border-violet-900/30 px-4 py-2.5 rounded-xl">
-                <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">{{ t('fire.targetNumber') }}</span>
-                <h4 class="font-display font-extrabold text-2xl text-violet-600 dark:text-violet-400 leading-none mt-1">
-                  {{ fireStatus().fireNumber | currency:'EUR':'symbol':'1.0-0' }}
-                </h4>
-              </div>
-            </div>
-
-            <!-- F.I.R.E RESULTS CARD -->
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
-              
-              <!-- Left descriptive side -->
-              <div class="md:col-span-3 flex flex-col gap-4">
-                <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed" 
-                   [innerHTML]="t('fire.descText', { expenses: monthlyExpenses(), fireNumber: (fireStatus().fireNumber | currency:'EUR':'symbol':'1.0-0') })">
-                </p>
-
-                <div class="flex flex-col gap-2">
-                  <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400 font-semibold">
-                    <svg class="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Cálculo ajustado en base al poder adquisitivo real (no nominal)</span>
-                  </div>
-                  <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400 font-semibold">
-                    <svg class="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Basado en un retiro del 4% anual reajustado anualmente</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Visual Timer side -->
-              <div class="md:col-span-2 flex flex-col items-center justify-center border-l border-zinc-200/50 dark:border-zinc-800/50 pl-0 md:pl-6 py-4">
-                
-                @if (fireStatus().yearsToFire !== null && fireStatus().yearsToFire !== 0) {
-                  
-                  <span class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest text-center">
-                    {{ t('fire.timeToFire') }}
-                  </span>
-                  
-                  <div class="text-center mt-2">
-                    <h2 class="font-display font-black text-5xl md:text-6xl text-violet-600 dark:text-violet-400 leading-none">
-                      {{ fireStatus().yearsToFire }}
-                    </h2>
-                    <p class="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mt-2">
-                      {{ t('inputs.years') | lowercase }} ({{ fireStatus().monthsToFire }} {{ t('fire.months') }})
-                    </p>
-                  </div>
-
-                  <span class="mt-4 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100/50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-900/50">
-                    {{ t('fire.achievable') }}
-                  </span>
-
-                } @else if (fireStatus().yearsToFire === 0) {
-                  
-                  <div class="text-center flex flex-col items-center gap-3">
-                    <div class="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 flex items-center justify-center">
-                      <svg class="h-6 w-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <h4 class="font-display font-extrabold text-lg text-emerald-600 dark:text-emerald-400">
-                      {{ t('fire.alreadyFire') }}
-                    </h4>
-                  </div>
-
-                } @else {
-                  
-                  <div class="text-center flex flex-col items-center gap-2">
-                    <div class="h-12 w-12 rounded-full bg-rose-100 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 flex items-center justify-center">
-                      <svg class="h-6 w-6 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                    </div>
-                    <h4 class="font-display font-bold text-sm text-rose-600 dark:text-rose-400">
-                      {{ t('fire.unachievable') }}
-                    </h4>
-                    <p class="text-[10px] text-zinc-500 dark:text-zinc-400 leading-normal max-w-[150px] mx-auto">
-                      Intenta aumentar tu ahorro mensual o ampliar la tasa de rentabilidad para que el objetivo sea viable.
-                    </p>
-                  </div>
-
-                }
-
-              </div>
-
-            </div>
-
-          </div>
-
+        <div [class.hidden]="activeTab() !== 'fire'">
+          <app-fire-tab [fireStatus]="fireStatus()" [monthlyExpenses]="monthlyExpenses()">
+          </app-fire-tab>
+        </div>
       </section>
-
     </div>
-
   </main>
 </div>

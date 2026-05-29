@@ -1,0 +1,102 @@
+<div *transloco="let t" class="bg-white dark:bg-zinc-900/40 p-6 sm:p-8 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm flex flex-col gap-6 transition-all-300">
+    
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200/50 dark:border-zinc-800/50 pb-4 gap-3">
+      <div>
+        <h3 class="font-display font-extrabold text-xl text-zinc-900 dark:text-zinc-100">
+          {{ t('nav.fire') }}
+        </h3>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400">
+          {{ t('fire.targetNumberDesc') }}
+        </p>
+      </div>
+      <div class="text-left sm:text-right bg-violet-50 dark:bg-violet-950/30 border border-violet-100/50 dark:border-violet-900/30 px-4 py-2.5 rounded-xl">
+        <span class="text-[10px] font-bold text-violet-500 uppercase tracking-widest">{{ t('fire.targetNumber') }}</span>
+        <h4 class="font-display font-extrabold text-2xl text-violet-600 dark:text-violet-400 leading-none mt-1">
+          {{ fireStatus().fireNumber | currency:'EUR':'symbol':'1.0-0' }}
+        </h4>
+      </div>
+    </div>
+
+    <!-- F.I.R.E RESULTS CARD -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+      
+      <!-- Left descriptive side -->
+      <div class="md:col-span-3 flex flex-col gap-4">
+        <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed" 
+           [innerHTML]="t('fire.descText', { expenses: monthlyExpenses(), fireNumber: (fireStatus().fireNumber | currency:'EUR':'symbol':'1.0-0') })">
+        </p>
+
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400 font-semibold">
+            <svg class="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Cálculo ajustado en base al poder adquisitivo real (no nominal)</span>
+          </div>
+          <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400 font-semibold">
+            <svg class="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Basado en un retiro del 4% anual reajustado anualmente</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Visual Timer side -->
+      <div class="md:col-span-2 flex flex-col items-center justify-center border-l border-zinc-200/50 dark:border-zinc-800/50 pl-0 md:pl-6 py-4">
+        
+        @if (fireStatus().yearsToFire !== null && fireStatus().yearsToFire !== 0) {
+          
+          <span class="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest text-center">
+            {{ t('fire.timeToFire') }}
+          </span>
+          
+          <div class="text-center mt-2">
+            <h2 class="font-display font-black text-5xl md:text-6xl text-violet-600 dark:text-violet-400 leading-none">
+              {{ fireStatus().yearsToFire }}
+            </h2>
+            <p class="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mt-2">
+              {{ t('inputs.years') | lowercase }} ({{ fireStatus().monthsToFire }} {{ t('fire.months') }})
+            </p>
+          </div>
+
+          <span class="mt-4 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100/50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-900/50">
+            {{ t('fire.achievable') }}
+          </span>
+
+        } @else if (fireStatus().yearsToFire === 0) {
+          
+          <div class="text-center flex flex-col items-center gap-3">
+            <div class="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 flex items-center justify-center">
+              <svg class="h-6 w-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h4 class="font-display font-extrabold text-lg text-emerald-600 dark:text-emerald-400">
+              {{ t('fire.alreadyFire') }}
+            </h4>
+          </div>
+
+        } @else {
+          
+          <div class="text-center flex flex-col items-center gap-2">
+            <div class="h-12 w-12 rounded-full bg-rose-100 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 flex items-center justify-center">
+              <svg class="h-6 w-6 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h4 class="font-display font-bold text-sm text-rose-600 dark:text-rose-400">
+              {{ t('fire.unachievable') }}
+            </h4>
+            <p class="text-[10px] text-zinc-500 dark:text-zinc-400 leading-normal max-w-[150px] mx-auto">
+              Intenta aumentar tu ahorro mensual o ampliar la tasa de rentabilidad para que el objetivo sea viable.
+            </p>
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  </div>

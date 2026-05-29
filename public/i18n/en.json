@@ -20,7 +20,7 @@
     "riskConservative": "Conservative",
     "riskModerate": "Moderate",
     "riskAggressive": "Aggressive",
-    "riskExtreme": "Extreme (100% Equities)",
+    "riskExtreme": "Extreme",
     "reset": "Reset Variables"
   },
   "outputs": {
