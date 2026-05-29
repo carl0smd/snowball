@@ -29,9 +29,7 @@
         >
           {{ t('title') }}<span class="text-violet-500 font-extrabold">.</span>
         </h1>
-        <p
-          class="hidden sm:block text-[9px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold mt-1.5 leading-none"
-        >
+        <p class="hidden sm:block text-[9px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold mt-1.5 leading-none">
           {{ t('subtitle') }}
         </p>
       </div>
@@ -66,9 +64,7 @@
         [title]="currentCurrency() === 'EUR' ? 'Cambiar a Dólar (USD)' : 'Cambiar a Euro (EUR)'"
       >
         <span>{{ currentCurrency() === 'EUR' ? '€' : '$' }}</span>
-        <span class="hidden sm:inline">{{
-          currentCurrency() === 'EUR' ? ' (EUR)' : ' (USD)'
-        }}</span>
+        <span class="hidden sm:inline">{{ currentCurrency() === 'EUR' ? ' (EUR)' : ' (USD)' }}</span>
       </button>
 
       <!-- Language Selector -->
@@ -82,6 +78,7 @@
       <!-- Theme Toggle -->
       <button
         (click)="toggleTheme.emit()"
+        [attr.aria-label]="currentLang() === 'es' ? (darkMode() ? 'Activar modo claro' : 'Activar modo oscuro') : (darkMode() ? 'Activate light mode' : 'Activate dark mode')"
         class="h-8 w-8 rounded-lg border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer transition-all-300 flex items-center justify-center shrink-0"
       >
         @if (darkMode()) {

@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './slider-input.component.html',
 })
 export class SliderInputComponent {
+  private static nextId = 0;
+  uniqueId = `slider-input-${SliderInputComponent.nextId++}`;
+
   label = input.required<string>();
   displayValue = input.required<string>();
   value = input.required<number>();
