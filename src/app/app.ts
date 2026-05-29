@@ -38,6 +38,9 @@ export interface ScenarioYearlyResult {
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
+  host: {
+    '(window:scroll)': 'onWindowScroll()'
+  }
 })
 export class App implements OnInit {
   private financeService = inject(FinanceService);
@@ -58,6 +61,24 @@ export class App implements OnInit {
   currency = signal<'EUR' | 'USD'>('EUR');
   activeTab = signal<'compound' | 'fire'>('compound');
   chartMode = signal<'nominal-real' | 'scenarios'>('nominal-real');
+  isScrolledDown = signal<boolean>(false);
+
+  onWindowScroll() {
+    this.isScrolledDown.set(window.scrollY > 250);
+  }
+
+  toggleScroll() {
+    if (this.isScrolledDown()) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.getElementById('results-section');
+      if (element) {
+        const yOffset = -80; // height of sticky header (64px) + breathing padding (16px)
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  }
 
   // --- Computed Outputs ---
   simulationResults = computed<YearlySimulationResult[]>(() => {

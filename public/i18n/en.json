@@ -71,6 +71,10 @@
       "optimistic": "Favorable Scenario",
       "expected": "Expected Scenario",
       "pessimistic": "Unfavorable Scenario"
+    },
+    "mobile": {
+      "scrollToInputs": "Adjust",
+      "scrollToResults": "View Charts"
     }
   }
 }

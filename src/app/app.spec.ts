@@ -137,4 +137,20 @@ describe('App', () => {
     app.importFromJson(mockEvent);
     expect((mockEvent.target as HTMLInputElement).value).toBe('');
   });
+
+  it('should initialize isScrolledDown as false and update on scroll', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app.isScrolledDown()).toBe(false);
+    
+    // Simulate scroll past threshold
+    window.scrollY = 300;
+    app.onWindowScroll();
+    expect(app.isScrolledDown()).toBe(true);
+    
+    // Simulate scroll back to top
+    window.scrollY = 100;
+    app.onWindowScroll();
+    expect(app.isScrolledDown()).toBe(false);
+  });
 });
