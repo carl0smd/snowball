@@ -1,16 +1,25 @@
 <div class="flex flex-col gap-1.5">
   <div class="flex items-center justify-between">
     <label class="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ label() }}</label>
-    <span class="text-sm font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-100/50 dark:border-violet-900/30">
-      {{ displayValue() }}
-    </span>
+    <input 
+      [type]="isFocused ? 'number' : 'text'"
+      [min]="min()"
+      [max]="max()"
+      [step]="step()"
+      [value]="isFocused ? value() : displayValue()"
+      (input)="onInput($event)"
+      (keydown)="onKeyDown($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      class="w-28 text-right font-mono font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded border border-violet-200 dark:border-violet-800/80 hover:border-violet-400 dark:hover:border-violet-500 focus:bg-white dark:focus:bg-zinc-950 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 focus:outline-none transition-all duration-200 cursor-text shadow-sm"
+    />
   </div>
   <input type="range" 
          [min]="min()" 
          [max]="max()" 
          [step]="step()" 
-         [ngModel]="value()" 
-         (ngModelChange)="valueChange.emit($event)">
+         [value]="value()" 
+         (input)="onSliderInput($event)">
   <div class="flex justify-between text-[9px] text-zinc-400 dark:text-zinc-500 font-semibold px-0.5 leading-none">
     <span>{{ minLabel() }}</span>
     <span>{{ midLabel() }}</span>

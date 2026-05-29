@@ -1,13 +1,12 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { SliderInputComponent } from '../slider-input/slider-input.component';
 
 @Component({
   selector: 'app-control-panel',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslocoDirective, SliderInputComponent],
+  imports: [CommonModule, TranslocoDirective, SliderInputComponent],
   templateUrl: './control-panel.component.html',
 })
 export class ControlPanelComponent {

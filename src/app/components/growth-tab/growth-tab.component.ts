@@ -86,22 +86,29 @@ export class GrowthTabComponent {
   private initGrowthChart() {
     if (!this._growthChartCanvas) return;
     const isDark = this.darkMode();
-    const ctx = this._growthChartCanvas.nativeElement.getContext('2d');
-    if (ctx) {
-      this.growthChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: [],
-          datasets: [],
-        },
-        options: this.getGrowthChartOptions(isDark),
-      });
-      if (this.chartMode() === 'nominal-real') {
-        this.updateGrowthChartData(this.results(), isDark);
-      } else {
-        this.updateScenariosChartData(this.scenarios(), isDark);
+    
+    setTimeout(() => {
+      if (!this._growthChartCanvas) return;
+      const ctx = this._growthChartCanvas.nativeElement.getContext('2d');
+      if (ctx) {
+        if (this.growthChartInstance) {
+          this.growthChartInstance.destroy();
+        }
+        this.growthChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: [],
+            datasets: [],
+          },
+          options: this.getGrowthChartOptions(isDark),
+        });
+        if (this.chartMode() === 'nominal-real') {
+          this.updateGrowthChartData(this.results(), isDark);
+        } else {
+          this.updateScenariosChartData(this.scenarios(), isDark);
+        }
       }
-    }
+    }, 0);
   }
 
   private initAllocationChart() {
