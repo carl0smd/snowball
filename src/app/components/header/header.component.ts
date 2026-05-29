@@ -7,6 +7,9 @@ import { TranslocoDirective } from '@jsverse/transloco';
   standalone: true,
   imports: [CommonModule, TranslocoDirective],
   templateUrl: './header.component.html',
+  host: {
+    class: 'sticky top-0 z-50 block w-full'
+  }
 })
 export class HeaderComponent {
   currentLang = input.required<string>();

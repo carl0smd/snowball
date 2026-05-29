@@ -39,6 +39,7 @@ input[type="range"] {
   background: transparent;
   cursor: pointer;
   width: 100%;
+  height: 24px; /* Fixes vertical clipping for thumb elevation/scale */
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -65,6 +66,42 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
   background-color: oklch(0.55 0.25 330);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.25);
+  background-color: oklch(0.5 0.25 330);
+}
+
+/* Firefox Support to prevent clipping and preserve premium design */
+input[type="range"]::-moz-range-track {
+  background: oklch(0.92 0.01 300);
+  height: 6px;
+  border-radius: 9999px;
+  border: none;
+}
+.dark input[type="range"]::-moz-range-track {
+  background: oklch(0.25 0.01 300);
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: oklch(0.6 0.25 330);
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  border: none;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  background-color: oklch(0.55 0.25 330);
+}
+
+input[type="range"]::-moz-range-thumb:active {
+  transform: scale(1.25);
+  background-color: oklch(0.5 0.25 330);
 }
 
 /* Animation Utilities */
