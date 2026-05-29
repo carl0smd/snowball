@@ -84,4 +84,17 @@ describe('App', () => {
     expect(year10.optimistic).toBeGreaterThan(year10.expected);
     expect(year10.expected).toBeGreaterThan(year10.pessimistic);
   });
+
+  it('should clear the risk profile when deselected and reset annual return to 7%', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    
+    app.selectRiskProfile('moderate');
+    expect(app.riskProfile()).toBe('moderate');
+    expect(app.annualReturn()).toBe(6.0);
+    
+    app.deselectRiskProfile();
+    expect(app.riskProfile()).toBeNull();
+    expect(app.annualReturn()).toBe(7);
+  });
 });

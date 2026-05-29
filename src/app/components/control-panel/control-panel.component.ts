@@ -26,6 +26,7 @@ export class ControlPanelComponent {
   inflationChange = output<number>();
   monthlyExpensesChange = output<number>();
   riskProfileSelect = output<'conservative' | 'moderate' | 'aggressive' | 'extreme'>();
+  riskProfileDeselect = output<void>();
   resetSettings = output<void>();
   exportSettings = output<void>();
   importSettings = output<Event>();

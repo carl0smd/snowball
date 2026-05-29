@@ -240,6 +240,11 @@ export class App implements OnInit {
     }
   }
 
+  deselectRiskProfile() {
+    this.riskProfile.set(null);
+    this.annualReturn.set(7);
+  }
+
   onReturnChange(val: number) {
     this.annualReturn.set(val);
     this.riskProfile.set(null); // Deselect preset profile on manual slider drag
